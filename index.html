@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Your Match Is Nearby 👀</title>
+  <meta name="description" content="Ready to meet someone new?">
+
+  <!-- Facebook / Open Graph Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Your Match Is Nearby 👀">
+  <meta property="og:description" content="Ready to meet someone new?">
+  <meta property="og:image" content="https://snipboard.io/nXrsLG.jpg">
+  <meta property="og:url" content="https://findyour-love.vercel.app/">
+
+  <!-- Twitter / Social Preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your Match Is Nearby 👀">
+  <meta name="twitter:description" content="Ready to meet someone new?">
+  <meta name="twitter:image" content="https://snipboard.io/nXrsLG.jpg">
 
   <style>
     * {
@@ -14,93 +29,106 @@
 
     html, body {
       width: 100%;
-      height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
       background: #111;
+      color: #fff;
     }
 
     body {
-      overflow: hidden;
+      min-height: 100vh;
     }
 
-    .screen {
-      position: fixed;
-      inset: 0;
+    .page {
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
       background:
-        linear-gradient(rgba(0,0,0,.48), rgba(0,0,0,.75)),
-        url("https://snipboard.io/nXrsLG.jpg") center/cover no-repeat;
+        linear-gradient(
+          rgba(0, 0, 0, .48),
+          rgba(0, 0, 0, .78)
+        ),
+        url("https://snipboard.io/nXrsLG.jpg")
+        center / cover no-repeat;
     }
 
-    .loading-box {
-      width: min(88%, 380px);
-      padding: 34px 25px;
+    .card {
+      width: min(100%, 390px);
+      padding: 34px 24px 30px;
       text-align: center;
-      color: white;
       border-radius: 24px;
-      background: rgba(15,15,15,.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 15px 50px rgba(0,0,0,.45);
+      background: rgba(18, 18, 18, .78);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
     }
 
     .heart {
-      width: 62px;
-      height: 62px;
-      margin: 0 auto 22px;
-      position: relative;
-      animation: pulse 1s infinite;
-    }
-
-    .heart::before {
-      content: "♥";
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 62px;
-      line-height: 62px;
-      color: #ff477e;
-      text-shadow: 0 0 25px rgba(255,71,126,.65);
+      color: #ff4d6d;
+      text-shadow: 0 0 28px rgba(255,77,109,.65);
+      animation: heartbeat 1s ease-in-out infinite;
     }
 
     h1 {
-      font-size: 22px;
+      font-size: 23px;
       line-height: 1.3;
+      font-weight: 800;
       margin-bottom: 10px;
-      font-weight: 700;
     }
 
     .message {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 15px;
-      color: rgba(255,255,255,.78);
-      min-height: 22px;
+      line-height: 1.45;
+      color: rgba(255,255,255,.76);
       transition: opacity .25s ease;
     }
 
-    .dots {
+    .loader {
       display: flex;
       justify-content: center;
       gap: 7px;
       margin-top: 22px;
     }
 
-    .dots span {
+    .loader span {
       width: 7px;
       height: 7px;
       border-radius: 50%;
       background: #fff;
-      opacity: .3;
-      animation: dot 1.2s infinite;
+      opacity: .25;
+      animation: bounce 1.2s infinite;
     }
 
-    .dots span:nth-child(2) {
-      animation-delay: .2s;
+    .loader span:nth-child(2) {
+      animation-delay: .18s;
     }
 
-    .dots span:nth-child(3) {
-      animation-delay: .4s;
+    .loader span:nth-child(3) {
+      animation-delay: .36s;
     }
 
-    @keyframes pulse {
+    .note {
+      margin-top: 22px;
+      font-size: 11px;
+      color: rgba(255,255,255,.45);
+    }
+
+    @keyframes heartbeat {
       0%, 100% {
         transform: scale(1);
       }
@@ -109,14 +137,14 @@
       }
     }
 
-    @keyframes dot {
+    @keyframes bounce {
       0%, 100% {
         opacity: .25;
         transform: translateY(0);
       }
       50% {
         opacity: 1;
-        transform: translateY(-4px);
+        transform: translateY(-5px);
       }
     }
   </style>
@@ -124,10 +152,10 @@
 
 <body>
 
-  <main class="screen">
-    <div class="loading-box">
+  <main class="page">
+    <section class="card">
 
-      <div class="heart"></div>
+      <div class="heart">♥</div>
 
       <h1>Your Match Is Nearby 👀</h1>
 
@@ -135,13 +163,17 @@
         Getting things ready...
       </div>
 
-      <div class="dots">
+      <div class="loader" aria-label="Loading">
         <span></span>
         <span></span>
         <span></span>
       </div>
 
-    </div>
+      <div class="note">
+        Please wait a moment...
+      </div>
+
+    </section>
   </main>
 
   <script>
@@ -149,23 +181,23 @@
 
     const messages = [
       "Getting things ready...",
-      "Finding dating options near you...",
+      "Preparing dating options near you...",
       "Almost there..."
     ];
 
-    const messageEl = document.getElementById("message");
+    const messageElement = document.getElementById("message");
 
-    let index = 0;
+    let step = 0;
 
     const messageTimer = setInterval(() => {
-      index++;
+      step++;
 
-      if (index < messages.length) {
-        messageEl.style.opacity = "0";
+      if (step < messages.length) {
+        messageElement.style.opacity = "0";
 
         setTimeout(() => {
-          messageEl.textContent = messages[index];
-          messageEl.style.opacity = "1";
+          messageElement.textContent = messages[step];
+          messageElement.style.opacity = "1";
         }, 180);
       }
     }, 650);
